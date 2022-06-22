@@ -10,5 +10,5 @@ target 'LearnApp' do
 pod 'Firebase/Core'
 pod 'FirebaseDatabase'
 pod 'Firebase/Auth'
-
+pod 'SQLite.swift', '~> 0.13.3'
 end

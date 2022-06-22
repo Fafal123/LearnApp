@@ -17,22 +17,10 @@ class MainViewController: UIViewController {
         return scrollView
     }()
     
-    private let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "wtr")
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    private let gokartImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "gokart")
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    private var frontLeftTire: UITextField = {
+    private var userDataInput: UITextField = {
         let field = UITextField()
+        field.placeholder = "test"
+        field.layer.borderWidth = 1
         return field
     }()
     
@@ -58,17 +46,26 @@ class MainViewController: UIViewController {
         return label
     }()
     
+    private let outputDataLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.textAlignment = .center
+        label.textColor = UIColor.lightGray
+        label.font = .systemFont(ofSize: 20, weight: .bold)
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 //        view.backgroundColor = .red
-        
+       
         view.addSubview(scrollView)
-        scrollView.addSubview(imageView)
-        scrollView.addSubview(gokartImageView)
+
         scrollView.addSubview(logOutButton)
         scrollView.addSubview(userDataLabel)
+        scrollView.addSubview(userDataInput)
+        
         
         logOutButton.addTarget(self, action: #selector(logOutTap), for: .touchUpInside)
     }
@@ -81,6 +78,11 @@ class MainViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        let screen = UIScreen.main.bounds
+        let screenWidth = screen.width
+        print("size \(screenWidth)")
+        
         scrollView.frame = view.bounds
         
         let size = view.width
@@ -92,14 +94,8 @@ class MainViewController: UIViewController {
                                      y: 40,
                                   width: 70,
                                  height: 25)
-        imageView.frame = CGRect(x: 0,
-                                 y: 20,
-                                 width: size,
-                                 height: size/2)
-        gokartImageView.frame = CGRect(x: (size/2) - 70,
-                                 y: imageView.bottom + 20,
-                                 width: 150,
-                                 height: size/2)
+        outputDataLabel.frame = CGRect(x: 10, y: userDataLabel.bottom + 50, width: screenWidth - 20, height: 150)
+        userDataInput.frame = CGRect(x: 10, y: 250,  width: screenWidth - 20, height: 100)
         
     }
     
